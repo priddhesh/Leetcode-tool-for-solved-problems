@@ -47,8 +47,7 @@ app.get('/ques', (req, res) => {
 app.post('/updateStatus/:ques', (req, res) => {
     const {status} = req.body;
     let ques = req.params.ques;
-    ques = ques.replace(/%20/g, ' ');
-    console.log(status,ques);
+    ques = decodeURIComponent(ques);
   
     pool.getConnection((err, connection) => {
       if (err) {
