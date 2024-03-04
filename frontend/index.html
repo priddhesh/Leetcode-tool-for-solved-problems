@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solved Questions</title>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    select {
+        padding: 5px 10px;
+    }
+    .done {
+        background-color: #7CFC00; /* Green */
+    }
+    .revisit {
+        background-color: #FFFF00; /* Yellow */
+    }
+</style>
+</head>
+<body>
+
+<h2>Solved Questions</h2>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Status</th>
+  </tr>
+  <tbody id="questionTable">
+  </tbody>
+</table>
+
+<script>
+  function updateStatus(id, newStatus) {
+    fetch(`https://leetcode-tool.onrender.com/updateStatus/${id}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: newStatus })
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Status updated successfully:', data);
+    })
+    .catch(error => {
+      console.error('Error updating status:', error);
+    });
+  }
+
+  fetch('https://leetcode-tool.onrender.com/ques')
+    .then(response => response.json())
+    .then(data => {
+      const questionTable = document.getElementById('questionTable');
+      data.forEach(item => {
+        const row = document.createElement('tr');
+
+        const quesCell = document.createElement('td');
+        quesCell.textContent = item.ques;
+        row.appendChild(quesCell);
+
+        const statusCell = document.createElement('td');
+        const select = document.createElement('select');
+        const options = ['Pending', 'Revisit', 'Done'];
+
+        options.forEach((option, index) => {
+          const optionElement = document.createElement('option');
+          optionElement.value = index;
+          optionElement.textContent = option;
+          select.appendChild(optionElement);
+        });
+
+        select.value = item.status;
+        select.addEventListener('change', () => {
+          updateStatus(item.ques, select.value);
+          updateStatusUI(row, select.value);
+        });
+
+        statusCell.appendChild(select);
+        row.appendChild(statusCell);
+
+        questionTable.appendChild(row);
+
+        row.classList.add(getRowColor(item.status));
+      });
+    });
+
+  function updateStatusUI(row, newStatus) {
+    row.classList.remove('done', 'revisit', 'pending');
+    row.classList.add(getRowColor(newStatus));
+  }
+
+  function getRowColor(status) {
+    switch (status) {
+      case '0':
+        return 'pending';
+      case '1':
+        return 'revisit';
+      case '2':
+        return 'done';
+      default:
+        return '';
+    }
+  }
+</script>
+
+</body>
+</html>
