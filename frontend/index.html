@@ -43,7 +43,8 @@
 
 <script>
   function updateStatus(id, newStatus) {
-    fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${id}`, {
+    let decodedUrl = decodeURIComponent(id);
+    fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${decodedUrl}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
