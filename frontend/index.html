@@ -43,7 +43,7 @@
 
 <script>
   function updateStatus(id, newStatus) {
-    let encodedURI = encodeURIComponent(id);
+    id = id.replace(/ /g, '_');
     fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${encodedURI}`, {
       method: 'POST',
       headers: {
