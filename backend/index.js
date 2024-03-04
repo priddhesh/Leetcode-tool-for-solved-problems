@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 
 const corsOptions = {
-    origin: "https://leetcode-solved-problems-tracker.onrender.com", 
+    origin: "*", 
     methods: ['GET', 'POST'], 
     allowedHeaders: ['Content-Type', 'Authorization'] 
   };
