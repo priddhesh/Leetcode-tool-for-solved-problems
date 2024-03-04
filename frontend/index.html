@@ -74,10 +74,10 @@
 
         const quesCell = document.createElement('td');
         quesCell.textContent = item.ques;
-        quesCell.style.cursor = 'pointer'; 
+        quesCell.style.cursor = 'pointer'; // Change cursor to indicate it's clickable
         quesCell.addEventListener('click', () => {
-          console.log("dj");
-          const searchQuery = encodeURIComponent(item.ques)+ " leetcode";
+          console.log("s");
+          const searchQuery = encodeURIComponent(item.ques);
           const searchURL = `https://www.google.com/search?q=${searchQuery}`;
           window.open(searchURL, '_blank');
         });
