@@ -76,6 +76,7 @@
         quesCell.textContent = item.ques;
         quesCell.style.cursor = 'pointer'; 
         quesCell.addEventListener('click', () => {
+          console.log("dj");
           const searchQuery = encodeURIComponent(item.ques)+ " leetcode";
           const searchURL = `https://www.google.com/search?q=${searchQuery}`;
           window.open(searchURL, '_blank');
