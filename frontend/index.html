@@ -44,7 +44,7 @@
 <script>
   function updateStatus(id, newStatus) {
     id = id.replace(/ /g, '_');
-    fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${encodedURI}`, {
+    fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
