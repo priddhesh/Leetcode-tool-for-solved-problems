@@ -43,7 +43,7 @@
 
 <script>
   function updateStatus(id, newStatus) {
-    fetch(`https://leetcode-tool.onrender.com/updateStatus/${id}`, {
+    fetch(`https://leetcode-tool-for-solved-problems.vercel.app/${id}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -64,7 +64,7 @@
     });
   }
 
-  fetch('https://leetcode-tool.onrender.com/ques')
+  fetch('https://leetcode-tool-for-solved-problems.vercel.app/ques')
     .then(response => response.json())
     .then(data => {
       const questionTable = document.getElementById('questionTable');
